@@ -10,9 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test_app">
         <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/Theme.Test_app.NoActionBar"></activity>
+        <activity android:name=".NotifyList" />
+        <activity
             android:name=".NotificationDetail"
             android:label="@string/title_activity_notification_detail"
-            android:theme="@style/Theme.Test_app.NoActionBar"></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.Test_app.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".DisplayMessageActivity"
             android:parentActivityName=".MainActivity">

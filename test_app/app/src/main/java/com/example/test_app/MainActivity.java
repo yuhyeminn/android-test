@@ -27,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
     // Notification을 호출 할 button 변수
     private Button button_notify;
 
+    private Button move_timepicker;
+    private Button sidebar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,25 @@ public class MainActivity extends AppCompatActivity {
         });
         createNotificationChannel();
 
+        // timepicker
+        move_timepicker = findViewById(R.id.timepicker_view);
+        move_timepicker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), NotificationDetail.class);
+                startActivity(intent);
+            }
+        });
+
+        // sidebar 템플릿 확인
+        sidebar = findViewById(R.id.sidebar);
+        sidebar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /** Send 버튼 클릭시 호출*/
@@ -89,14 +111,16 @@ public class MainActivity extends AppCompatActivity {
             // 알림 탭 설정
             Intent intent = new Intent(this, NotificationDetail.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
                     .setSmallIcon(R.drawable.ic_notificatioin_watch)
                     .setContentTitle("커밋해야지")
                     .setContentText("커밋해야지")
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setCategory(NotificationCompat.CATEGORY_ALARM)
                     .setContentIntent(pendingIntent)
+                    .setFullScreenIntent(pendingIntent, true)
                     .setAutoCancel(true);
             notificationManager.notify(NOTIFICATION_ID, notifyBuilder.build());
         }catch (Exception e){

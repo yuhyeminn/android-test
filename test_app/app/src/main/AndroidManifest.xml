@@ -12,7 +12,7 @@
         <activity
             android:name=".MainActivity2"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.Test_app.NoActionBar"></activity>
+            android:theme="@style/Theme.Test_app.NoActionBar" />
         <activity android:name=".NotifyList" />
         <activity
             android:name=".NotificationDetail"

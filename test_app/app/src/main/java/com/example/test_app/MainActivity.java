@@ -1,7 +1,9 @@
 package com.example.test_app;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -29,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     private Button move_timepicker;
     private Button sidebar;
+
+    private DrawerLayout drawerLayout;
+    private View drawerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +65,34 @@ public class MainActivity extends AppCompatActivity {
         sidebar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
-                startActivity(intent);
+                /*Intent intent = new Intent(getApplicationContext(), MainActivity2.class);
+                startActivity(intent);*/
+                drawerLayout.openDrawer(drawerView);
             }
         });
+
+        //사이드바
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerView = (View) findViewById(R.id.drawerView);
+        DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+            }
+
+            @Override
+            public void onDrawerOpened(@NonNull View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(@NonNull View drawerView) {
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+            }
+        };
+        drawerLayout.addDrawerListener(listener);
+
     }
 
     /** Send 버튼 클릭시 호출*/
